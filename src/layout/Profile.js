@@ -1,12 +1,23 @@
 import React from 'react'
-import { StyleSheet, Text, View,StatusBar,TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View,StatusBar,TouchableOpacity, Alert } from 'react-native'
 import {Avatar} from "../Components/Avatar/index"
 import ProfileImage from "../../assets/10.jpg"
+import {firebase} from "./firebase"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import PropTypes from 'prop-types';
-const Profile = () => {
+
+
+const handleSignout= async()=>{
+    try{
+   await firebase.auth().signOut()
+   console.log('Sign out sucessfully')
+}catch(error){
+    Alert.alert(error.message)
+}
+}
+const Profile = ({navigation}) => {
     return (
         <View style={{flex:1}}>
             <StatusBar barStyle="light-content"backgroundColor="orange"/>
@@ -39,18 +50,21 @@ const Profile = () => {
 
 
                 </TouchableOpacity>
-                {/* <TouchableOpacity style={{height:50,borderRadius:10,marginTop:10,flexDirection:"row",backgroundColor:"orange",marginHorizontal:10}}>
+                <TouchableOpacity
+                onPress={handleSignout}
+                style={{height:50,borderRadius:10,marginTop:10,flexDirection:"row",backgroundColor:"orange",marginHorizontal:10}}>
                     <Icon name="weight-lifter"
                     size={30}
                     style={{marginLeft:20,marginTop:10}}
                     
                     
                     />
-                    <Text style={{marginLeft:30,marginTop:12,fontWeight:"bold",fontSize:20}}>Workouts</Text>
+                    <Text style={{marginLeft:30,marginTop:12,fontWeight:"bold",fontSize:20}}>Logout</Text>
                    
 
 
                 </TouchableOpacity>
+                {/* 
                 <TouchableOpacity style={{height:50,borderRadius:10,marginTop:10,flexDirection:"row",backgroundColor:"orange",marginHorizontal:10}}>
                     <Icon name="hamburger"
                     size={30}

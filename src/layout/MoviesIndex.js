@@ -9,6 +9,7 @@ import {HomeMovies,SearchMovies} from "../Reducer/Movie"
 
 import MovieListPage from "./MovieLists"
 const Movies = ({navigation}) => {
+
     const dispatch=useDispatch()
   
     
@@ -16,17 +17,17 @@ const Movies = ({navigation}) => {
     // const{SearchMovies}=useSelector((state)=>state.Movies)
     const searchedMovies= searchData.result === 0  ? false : true;
     let Movie = [];
-    if(!searchedMovies)
+    if(searchedMovies)
     {
-    Movie = MoviesHolly ? MoviesHolly.results:[]
+        Movie = searchData.results ? searchData.results : []
     }
-    else{
-    Movie = searchData.results ? searchData.results : []
-    }
+    console.log('Data is', Movie)
+
     
 
     const categories=["Movies"]
     const [categoryIndex,setcategoryIndex]=useState(0)
+    const [notFound,setNotFound]=useState('false')
     const [searchValue, setSearchValue] = useState('');
 
     
@@ -42,9 +43,10 @@ const Movies = ({navigation}) => {
 	// 		setMovies(responseJson.Search);
 	// 	}
 	// };
-    useEffect(() => {
-		dispatch(SearchMovies(searchValue));
-	}, [searchValue]);
+    // useEffect(() => {
+	// 	dispatch(SearchMovies(searchValue));
+    //     setNotFound(true)
+	// }, [searchValue]);
 
     console.log(searchValue,"hdvh");
   
@@ -69,6 +71,7 @@ const Movies = ({navigation}) => {
 const handleSearch = text => {
    
     setSearchValue(text);
+  
   };
   
    
@@ -77,12 +80,10 @@ const handleSearch = text => {
     },[])
 
     const renderLists=((item)=>{
-        const{id,backdrop_path,original_language,
-            original_title,overview,popularity,
-            poster_path,release_date,
-            title,vote_average,vote_count,}=item
+        console.log(item)
+        const{id,link,description,title,}=item
         return (
-            <MovieListPage id={id} backdrop_path={backdrop_path} title={title} poster_path={poster_path} navigation={navigation} overview={overview}/>
+            <MovieListPage id={id}link={link} title={title} description={description} navigation={navigation}/>
         )
     })
     return (
@@ -109,17 +110,30 @@ const handleSearch = text => {
                           alignItems:"center",
           }}>
                   <Icons name="search" size={25} style={{marginLeft:20}}/>
-                  <TextInput placeholder="search movies"value={searchValue} onChangeText={(e) =>handleSearch(e)}
+                  <TextInput placeholder="search Queries"value={searchValue} onChangeText={(e) =>handleSearch(e)}
                   style={{fontSize:18,fontWeight:"bold",color:"black",flex:1,
                   paddingLeft:10}}/>
               </View>
-              <View  style={{marginLeft:10,height:50,width:50,backgroundColor:"#4444",justifyContent:"center",alignItems:"center",borderRadius:10}}>
-                  <Icons name="funnel-outline" size={30} color="#fff"/>
+              <TouchableOpacity onPress={() => {
+                   dispatch(SearchMovies(searchValue));
+                   setNotFound(true);
+              }}>
+                <View  style={{marginLeft:10,height:50,width:50,backgroundColor:"#4444",justifyContent:"center",alignItems:"center",borderRadius:10}}>
+                    <Icons name="search" size={30} color="#fff"/>
 
-              </View>
+                </View>
+              </TouchableOpacity>
 
           </View>
-            {/* <CategoryList/> */}
+          { (Movie.length === 0 && notFound === 'false') &&  <View style={{margin:20}}>
+              <Text style={{fontSize:18,fontWeight:"bold"}}>Serach The Querie whatever You want!!!!</Text>
+          </View>
+        }
+         
+         { (Movie === [] && notFound) &&  <View>
+              <Text>Data Not Found</Text>
+          </View>
+        }   {/* <CategoryList/> */}
             {/* <MovieListPage/>
              <MovieListPage/>
              <MovieListPage/> */}
