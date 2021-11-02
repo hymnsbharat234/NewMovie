@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View,StatusBar,TouchableOpacity, Alert } from 'react-native'
 import {Avatar} from "../Components/Avatar/index"
 import ProfileImage from "../../assets/10.jpg"
-import {firebase} from "./firebase"
+import {auth} from "./firebase"
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -11,7 +11,7 @@ import PropTypes from 'prop-types';
 
 const handleSignout= async()=>{
     try{
-   await firebase.auth().signOut()
+   await auth().signOut()
    console.log('Sign out sucessfully')
 }catch(error){
     Alert.alert(error.message)
