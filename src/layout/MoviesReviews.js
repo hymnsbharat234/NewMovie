@@ -31,7 +31,7 @@ const MoviesRev= ({route,navigation}) => {
 
     const renderList=({author,content})=>{
         return (
-            <View>
+            <View style={{flex:1}}>
             <ScrollView>
                     
                     <View style={{marginTop:10,marginLeft:20}}>
@@ -50,9 +50,7 @@ const MoviesRev= ({route,navigation}) => {
                             <View style={{flexDirection:"row",marginTop:10}}>
                             <Text style={{fontSize:15,fontWeight:"bold" ,}}>Content</Text>
                             <Icons name="share" size={20} style={{marginLeft:10}}/>
-                            <Text>
-                            
-                             </Text>
+                          
                             
                             </View>
                             
@@ -117,7 +115,7 @@ if(flag){
                 }}>
                     <View style={{marginLeft:20,flexDirection:"row"}}>
                
-                        <Text style={{fontSize:17,paddingTop:5,paddingLeft:8,}}></Text>
+                        {/* <Text style={{fontSize:17,paddingTop:5,paddingLeft:8,}}></Text> */}
                     </View>
                     <Text style={{fontSize:18,fontWeight:"bold",marginLeft:20}}>Review Movie :-</Text>
                     <FlatList

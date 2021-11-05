@@ -81,13 +81,16 @@ const handleSearch = text => {
 
     const renderLists=((item)=>{
         console.log(item)
-        const{id,link,description,title,}=item
+        const{id,backdrop_path,original_language,
+            original_title,overview,popularity,
+            poster_path,release_date,
+            title,vote_average,vote_count,}=item
         return (
-            <MovieListPage id={id}link={link} title={title} description={description} navigation={navigation}/>
+            <MovieListPage  poster_path={poster_path} original_title={original_title} id={id}backdrop_path={backdrop_path} title={title} original_language={original_language} navigation={navigation} overview={overview} vote_average={vote_average} release_date={release_date}/>
         )
     })
     return (
-        <>
+      
               <SafeAreaView style={{
             flex:1,
            
@@ -110,7 +113,7 @@ const handleSearch = text => {
                           alignItems:"center",
           }}>
                   <Icons name="search" size={25} style={{marginLeft:20}}/>
-                  <TextInput placeholder="search Queries"value={searchValue} onChangeText={(e) =>handleSearch(e)}
+                  <TextInput placeholder="search Queries Moives"value={searchValue} onChangeText={(e) =>handleSearch(e)}
                   style={{fontSize:18,fontWeight:"bold",color:"black",flex:1,
                   paddingLeft:10}}/>
               </View>
@@ -126,14 +129,17 @@ const handleSearch = text => {
 
           </View>
           { (Movie.length === 0 && notFound === 'false') &&  <View style={{margin:20}}>
-              <Text style={{fontSize:18,fontWeight:"bold"}}>Serach The Querie whatever You want!!!!</Text>
+              <Text style={{fontSize:18,fontWeight:"bold"}}>Serach The Movie whatever You want!!!!</Text>
           </View>
         }
-         
-         { (Movie === [] && notFound) &&  <View>
+           
+         { (Movie === [] && notFound==="true") &&  
+         <View>
               <Text>Data Not Found</Text>
           </View>
-        }   {/* <CategoryList/> */}
+        }   
+        
+        {/* <CategoryList/> */}
             {/* <MovieListPage/>
              <MovieListPage/>
              <MovieListPage/> */}
@@ -161,7 +167,7 @@ const handleSearch = text => {
         
      
 
-        </>
+      
     )
 }
 

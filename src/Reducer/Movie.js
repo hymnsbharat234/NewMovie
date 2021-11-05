@@ -37,14 +37,15 @@ export const SearchMovies=createAsyncThunk(
     "SearchMovies",
         async(searchValue)=>{
             console.log("search",searchValue)
-            const headers={
-                "x-rapidapi-key":"30a79d49e4msh60149164f98a8a5p16accdjsn3726a274f766",
-                "x-rapidapi-host":"google-search3.p.rapidapi.com",
-                "useQueryString": true
-            }
-            const result = await axios.get(`https://google-search3.p.rapidapi.com/api/v1/search/q=${searchValue}&num=100`,{
-                headers:headers
-            })
+            // const headers={
+            //     "x-rapidapi-key":"30a79d49e4msh60149164f98a8a5p16accdjsn3726a274f766",
+            //     "x-rapidapi-host":"google-search3.p.rapidapi.com",
+            //     "useQueryString": true
+            // }
+            // const result = await axios.get(`https://google-search3.p.rapidapi.com/api/v1/search/q=${searchValue}&num=100`,{
+            //     headers:headers
+            // })
+            const result = await axios.get(`https://api.themoviedb.org/3/search/movie?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1&include_adult=false&query=${searchValue}`)
             console.log("result",result)
             return result.data
 

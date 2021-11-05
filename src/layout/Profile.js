@@ -10,12 +10,12 @@ import PropTypes from 'prop-types';
 
 
 const handleSignout= async()=>{
-    try{
-   await auth().signOut()
-   console.log('Sign out sucessfully')
-}catch(error){
-    Alert.alert(error.message)
-}
+//     try{
+//    await auth().signOut()
+//    console.log('Sign out sucessfully')
+// }catch(error){
+//     Alert.alert(error.message)
+// }
 }
 const Profile = ({navigation}) => {
     return (
