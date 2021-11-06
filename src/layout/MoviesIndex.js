@@ -16,7 +16,7 @@ const Movies = ({navigation}) => {
     const{MoviesHolly, searchData}=useSelector((state)=>state.Movies)
     // const{SearchMovies}=useSelector((state)=>state.Movies)
     const searchedMovies= searchData.result === 0  ? false : true;
-    let Movie = [];
+    let Movie = MoviesHolly ? MoviesHolly.results :[];
     if(searchedMovies)
     {
         Movie = searchData.results ? searchData.results : []
